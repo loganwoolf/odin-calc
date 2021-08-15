@@ -1,3 +1,36 @@
+
+
+
+body {
+   margin: 0;
+   height: 100vh;
+   background: grey;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+
+}
+#app {
+   display: grid;
+   grid-auto-rows: auto auto;
+   width: max-content;
+   gap: 0.5rem;
+   background: darkolivegreen;
+   padding: 1rem;
+   border-radius: 0.5rem;
+   box-shadow: 0 0.5rem 3rem black;
+}
+
+.display {
+   background-color: goldenrod;
+}
+.display__input {
+   text-align: left;
+}
+.display__output {
+   text-align: right;
+}
+
 .buttons {
    display: flex;
    flex-direction: row;
