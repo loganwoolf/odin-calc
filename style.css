@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&family=VT323&display=swap');
 
 
 body {
@@ -8,7 +8,7 @@ body {
    justify-content: center;
    align-items: center;
    display: flex;
-
+   
 }
 #app {
    --gap: 0.5rem;
@@ -21,13 +21,18 @@ body {
    border-radius: 0.5rem;
    box-shadow: 0 0.5rem 3rem black;
 }
-
+button {
+   font-family: 'Ubuntu', sans-serif;
+   font-size: 1rem;
+}
 .display {
    background-color: goldenrod;
-   padding: 1rem;
+   font-family: VT323, monospace;
+   font-size: 1.5rem;
 }
 .display > p {
-   height: 1rem;
+   height: 1.5rem;
+   margin: 1rem;
 }
 .display__input {
    text-align: left;
