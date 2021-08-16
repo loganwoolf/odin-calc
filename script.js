@@ -60,20 +60,25 @@ function clearScreen() {
    outputField.textContent = outputString
 }
 function handleOperator(e) {
+   if (currentOperation) {
+      handleEquals()
+   }
    currentOperation = e.target.textContent
    previousInput = currentInput
    currentInput = ''
+   outputField.textContent = ''
    inputField.textContent = previousInput + ' ' + currentOperation
 }
 function handleEquals() {
    inputField.textContent += ' ' + currentInput 
    currentInput = operate(currentOperation, previousInput, currentInput)
    outputField.textContent = currentInput
+
 }
 
 numberButtons.forEach(button => button.addEventListener('click', handleInput))
 operatorButtons.forEach(button => button.addEventListener('click', handleOperator))
-dropButton.addEventListener("click", dropDigit)
+dropButton.addEventListener('click', dropDigit)
 clearButton.addEventListener('click', clearScreen)
 equalsButton.addEventListener('click', handleEquals)
 
