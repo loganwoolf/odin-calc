@@ -17,16 +17,12 @@ function operate(operator, a, b) {
    switch (operator) {
       case "+":
          return add(a, b)
-         break
       case "-":
          return subtract(a, b)
-         break
       case "*":
          return multiply(a, b)
-         break
       case "/":
          return divide(a, b)
-         break
       }
    }
 let inputString = ''
@@ -48,6 +44,9 @@ function handleInput(e) {
    outputField.textContent = currentInput
 }
 function dropDigit() {
+   if (typeof currentInput === 'number') {
+      clearScreen()
+   }
    currentInput = currentInput.slice(0,currentInput.length-1)
    outputField.textContent = currentInput
 }
@@ -56,24 +55,40 @@ function clearScreen() {
    currentInput = ''
    previousInput = ''
    outputString = ''
+   currentOperation = ''
    inputField.textContent = currentInput
    outputField.textContent = outputString
 }
 function handleOperator(e) {
-   if (currentOperation) {
-      handleEquals()
+   if (currentInput) {
+      if (currentOperation) {
+         handleEquals()
+      }
+      currentOperation = e.target.textContent
+      previousInput = currentInput
+      currentInput = ''
+      outputField.textContent = ''
+      inputField.textContent = previousInput + ' ' + currentOperation
    }
-   currentOperation = e.target.textContent
-   previousInput = currentInput
-   currentInput = ''
-   outputField.textContent = ''
-   inputField.textContent = previousInput + ' ' + currentOperation
 }
 function handleEquals() {
-   inputField.textContent += ' ' + currentInput 
-   currentInput = operate(currentOperation, previousInput, currentInput)
-   outputField.textContent = currentInput
-
+   if (currentInput && currentOperation) {
+      inputField.textContent += ' ' + currentInput 
+      currentInput = operate(currentOperation, previousInput, currentInput)
+      outputField.textContent = currentInput
+   }
+}
+function handleNewNumber(e) {
+   clearScreen()
+   handleInput(e)
+   numberButtons.forEach(button => button.removeEventListener('click', handleNewNumber))
+}
+function handleNewOperator() {
+   numberButtons.forEach(button => button.removeEventListener('click', handleNewNumber))
+}
+function handleNewInput(e) {
+   numberButtons.forEach(button => button.addEventListener('click', handleNewNumber))
+   operatorButtons.forEach(button => button.addEventListener('click', handleNewOperator))
 }
 
 numberButtons.forEach(button => button.addEventListener('click', handleInput))
@@ -81,8 +96,4 @@ operatorButtons.forEach(button => button.addEventListener('click', handleOperato
 dropButton.addEventListener('click', dropDigit)
 clearButton.addEventListener('click', clearScreen)
 equalsButton.addEventListener('click', handleEquals)
-
-/* Not Working Yet */
-// Chaining operations without pressing equals
-// clear stack for new number when pressing number key after pressing equals
-//
+equalsButton.addEventListener('click', handleNewInput)
