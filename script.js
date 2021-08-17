@@ -38,10 +38,17 @@ const operatorButtons = document.querySelectorAll('.operator')
 const dropButton = document.querySelector('#back')
 const clearButton = document.querySelector('#clear')
 const equalsButton = document.querySelector('#equals')
+const decimalButton = document.querySelector('#numdec')
 
 function handleInput(e) {
    currentInput += e.target.textContent
    outputField.textContent = currentInput
+   if (currentInput.includes('.')) {
+      decimalButton.disabled = true
+   }
+   if (currentInput.length > 14) {
+      numberButtons.forEach(button => button.disabled = true)
+   }
 }
 function dropDigit() {
    if (typeof currentInput === 'number') {
@@ -74,8 +81,14 @@ function handleOperator(e) {
 function handleEquals() {
    if (currentInput && currentOperation) {
       inputField.textContent += ' ' + currentInput 
-      currentInput = operate(currentOperation, previousInput, currentInput)
+      currentInput = operate(currentOperation, previousInput, currentInput).toString()
+      if (currentInput.includes('.')) {
+         let decimalPosition = currentInput.indexOf('.')
+         currentInput = currentInput.slice(0,decimalPosition+9)
+      }
       outputField.textContent = currentInput
+      previousInput = ''
+      currentOperation = ''
    }
 }
 function handleNewNumber(e) {
