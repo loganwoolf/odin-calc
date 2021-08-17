@@ -16,14 +16,10 @@ body {
    grid-auto-rows: auto auto;
    width: max-content;
    gap: var(--gap);
-   background: darkolivegreen;
+   background: olivedrab;
    padding: 1rem;
    border-radius: 0.5rem;
    box-shadow: 0 0.5rem 3rem black;
-}
-button {
-   font-family: 'Ubuntu', sans-serif;
-   font-size: 1rem;
 }
 .display {
    background-color: goldenrod;
@@ -41,6 +37,18 @@ button {
    text-align: right;
 }
 
+button {
+   font-family: 'Ubuntu', sans-serif;
+   font-size: 1rem;
+   border-radius: 0.2rem;
+   border-right: 2px solid dimgray;
+   border-bottom: 2px solid dimgray;
+   border-left: 1px solid lightgray;
+   border-top: 1px solid lightgray;
+}
+button:hover {
+   opacity: 80%;
+}
 .buttons {
    display: flex;
    flex-direction: row;
@@ -51,6 +59,12 @@ button {
    grid-template-columns: repeat(3, 3rem);
    grid-auto-rows: 2rem;
    gap: var(--gap);
+}
+.number,.operator,#equals {
+   background-color: blanchedalmond;
+}
+.control {
+   background-color: firebrick;
 }
 .buttons__operators {
    display: grid;
